@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+main() {
+
+  # TODO  - take builder, entry point 
+  # TODO  - dependency management
+  spago build
+  
+    parcel ./index.html --open &
+    inotifywait  -m ./src/** -e modify -e delete -e move | while read path action file; do
+      echo "pureHMR- updating $action"
+      spago build
+    done
+}
+
+main

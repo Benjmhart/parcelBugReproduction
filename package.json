@@ -1,0 +1,46 @@
+{
+  "name": "hsql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "better-npm-run start",
+    "build:normal": "better-npm-run build:normal",
+    "build:treeshake": "better-npm-run build:treeshake",
+    "serve": "simplehttpserver ./dist"
+  },
+  "betterScripts": {
+    "start": {
+      "command": "./purehmr",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "build:normal": {
+      "command": "spago build &&  rm -rf  ./dist/* && parcel build index.html --no-source-maps --public-url ./ --out-dir ./dist",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "build:treeshake": {
+      "command": "spago build &&  rm -rf  ./dist/* && parcel build index.html --experimental-scope-hoisting --no-source-maps --public-url ./ --out-dir ./dist",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "better-npm-run": "^0.1.1",
+    "simplehttpserver": "^0.3.0",
+    "spago": "^0.7.2"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10"
+  }
+}
